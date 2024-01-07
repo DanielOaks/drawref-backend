@@ -13,5 +13,15 @@ Here's where we'll be doing the planning and all.
 - **Technology:**
   - **Frontend:** React. Maybe TailwindCSS.
   - **Backend:** Express.js.
-  - **Login:** SSO with various services.
+  - **Login:** SSO with various services, not needed to access the site.
 
+## Pages
+
+MVP:
+- Selection page: Select category, images, and timing. Is the landing page.
+- Image page: Display the current image.
+- Admin dashboard: Modify available categories and images.
+
+Extra:
+- About page: Has info about the site and project.
+- Credits page: Has info about where the images are from.
