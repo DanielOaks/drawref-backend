@@ -86,9 +86,17 @@ Users are artists, may not be familiar with tech or the web, and are simply look
 MVP:
 - Selection page: Select category, images, and timing. Is the landing page.
 - Image page: Display the current image.
+- Register/Login page: Login via SSO. Account is auto-created if it doesn't exist.
 - Admin dashboard: Modify available categories and images.
 
 Extra:
 - Favourites page: Lists the user's favourite images.
 - About page: Has info about the site and project.
 - Credits page: Has info about where the images are from.
+
+
+## Mockups
+
+### Initial sketches
+
+![Rough page flow plans](docs/planning_page_flow.jpg)
