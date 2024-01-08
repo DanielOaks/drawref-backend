@@ -100,3 +100,5 @@ Extra:
 ### Initial sketches
 
 ![Rough page flow plans](docs/planning_page_flow.jpg)
+
+![User page wireframes](docs/planning_pages_1.jpg)
