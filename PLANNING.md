@@ -14,6 +14,7 @@ Here's where we'll be doing the planning and all.
 - **Technology:**
   - **Frontend:** React. Maybe TailwindCSS.
   - **Backend:** Express.js.
+  - **Database:** Postgres.
   - **Login:** SSO with various services, not needed to access the site.
 
 
