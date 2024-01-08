@@ -97,7 +97,14 @@ Extra:
 
 ## API
 
-The API lets you create and edit categories, upload images, and favourite images.
+### Upload API
+The Upload API lets admins upload images, which returns temporary image IDs, which should then be provided in image upload/creation calls on the User API.
+
+- `/image` `POST`: Upload an image.
+- `/bulk/image` `POST`: Upload multiple images.
+
+### User API
+The User API lets you create and edit categories, upload images, and favourite images.
 
 - Authentication
   - ... SSO login via OAuth? ...
