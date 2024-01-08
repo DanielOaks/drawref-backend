@@ -95,6 +95,24 @@ Extra:
 - Credits page: Has info about where the images are from.
 
 
+## API
+
+The API lets you create and edit categories, upload images, and favourite images.
+
+- Authentication
+  - ... SSO login via OAuth? ...
+- Categories
+  - `/categories` `GET`: Get all categories.
+  - `/category` `POST`: Create a category.
+  - `/category/{id}` `GET/PUT/DELETE`: Get, edit, or delete a category.
+- Images
+  - `/image` `POST`: Upload an image.
+  - `/image/{id}` `GET/PUT/DELETE`: Get, edit, or delete an image.
+  - `/image/{id}/fave` `POST/DELETE`: Make this image a favourite, or un-favourite it.
+  - `/bulk/images` `GET/POST/PUT/DELETE`: Bulk get/upload/edit/delete images.
+  - `/fave/images` `GET`: Get all favourited images.
+
+
 ## Mockups
 
 ### Initial sketches
