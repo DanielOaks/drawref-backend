@@ -130,6 +130,12 @@ The User API lets you create and edit categories, upload images, and favourite i
 
 ![Logo sketches](docs/logo-sketches.png)
 
+### Version 1
+
+![Selection 1](docs/mockup-v1-sel1.png)
+
+![Selection 2](docs/mockup-v1-sel2.png)
+
 ### Finalised
 
 ![Logo](docs/logo.svg)
