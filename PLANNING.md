@@ -127,3 +127,9 @@ The User API lets you create and edit categories, upload images, and favourite i
 ![Rough page flow plans](docs/planning_page_flow.jpg)
 
 ![User page wireframes](docs/planning_pages_1.jpg)
+
+![Logo sketches](docs/logo-sketches.png)
+
+### Finalised
+
+![Logo](docs/logo.svg)
