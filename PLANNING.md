@@ -130,9 +130,11 @@ The User API lets you create and edit categories, upload images, and favourite i
 
 ### Version 1
 
-![Selection 1](docs/mockup-v1-sel1.png)
+<p align="center">
+  <img alt="Light" src="docs/mockup-v1-sel1.png" width="45%">
+  <img alt="Dark" src="docs/mockup-v1-sel2.png" width="45%">
+</p>
 
-![Selection 2](docs/mockup-v1-sel2.png)
 
 ### Logo
 
