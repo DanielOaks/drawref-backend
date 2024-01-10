@@ -1,12 +1,14 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import urlJoin from 'url-join';
 
-import { categories, Category, images } from './sampleData';
+import { categories, Category, images } from './sampleData.js';
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3300;
+const hostBaseURL = process.env.HOST_BASEURL || "http://localhost:3300/images/";
 
 app.get("/", (req: Request, res: Response) => {
   res.send({
@@ -30,4 +32,5 @@ app.use('/images', express.static('public'));
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
+  console.log(`Example url: ${urlJoin(hostBaseURL, "/cover/etc.jpg")}`)
 });
