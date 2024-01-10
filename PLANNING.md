@@ -108,6 +108,8 @@ The User API lets you create and edit categories, upload images, and favourite i
 
 - Authentication
   - ... SSO login via OAuth? ...
+- Session
+  - `/session` `GET`: Get set of images for a session.
 - Categories
   - `/categories` `GET`: Get all categories.
   - `/category` `POST`: Create a category.
