@@ -9,17 +9,15 @@ interface MetadataMap {
 }
 
 export type Category = {
+  id: number,
   name: string,
   cover?: string,
   metadata: MetadataMap,
 }
 
-interface CategoryMap {
-  [key: number]: Category;
-}
-
-export var categories: CategoryMap = {
-  1: {
+export var categories: Category[] = [
+  {
+    id: 1,
     name: 'Poses',
     cover: 'covers/pose.jpg',
     metadata: {
@@ -42,9 +40,14 @@ export var categories: CategoryMap = {
       },
     },
   },
+]
+
+export type SessionImage = {
+  path: string,
+  author: string,
 }
 
-export var images = [
+export var images: SessionImage[] = [
   {
     path: 'covers/pose.jpg',
     author: 'Pixienop',
