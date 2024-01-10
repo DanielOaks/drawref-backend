@@ -10,6 +10,14 @@ const app: Express = express();
 const port = process.env.PORT || 3300;
 const hostBaseURL = process.env.HOST_BASEURL || "http://localhost:3300/images/";
 
+// fixup image URLs
+categories.forEach(cat => {
+  cat.cover = cat.cover ? urlJoin(hostBaseURL, cat.cover) : undefined;
+})
+images.forEach(img => {
+  img.path = urlJoin(hostBaseURL, img.path)
+})
+
 app.get("/", (req: Request, res: Response) => {
   res.send({
     ping: "ok",
@@ -17,34 +25,17 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/api/categories", (req: Request, res: Response) => {
-  var newCategories: Category[] = [];
-  categories.forEach(cat => {
-    cat.cover = cat.cover ? urlJoin(hostBaseURL, cat.cover) : undefined;
-    newCategories.push(cat)
-  })
-
-  res.send(newCategories);
+  res.send(categories);
 });
 app.get("/api/categories/:id", (req: Request, res: Response) => {
   var id = parseInt(req.params.id || '0')
   var selectedCat: Category = categories.filter(cat => cat.id === id)[0]
-  if (selectedCat && selectedCat.cover) {
-    selectedCat.cover = urlJoin(hostBaseURL, selectedCat.cover)
-  }
 
   res.send(selectedCat || {error: true, message: 'Category not found'});
 });
 
 app.get("/api/session", (req: Request, res: Response) => {
-  var newImages: SessionImage[] = [];
-  images.forEach(img => {
-    newImages.push({
-      path: urlJoin(hostBaseURL, img.path),
-      author: img.author,
-    })
-  })
-
-  res.send(newImages);
+  res.send(images);
 });
 
 app.use('/images', express.static('public'));

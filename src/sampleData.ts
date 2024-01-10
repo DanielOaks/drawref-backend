@@ -1,11 +1,10 @@
 type MetadataEntry = {
   name: string,
-  key: string,
   values: string[],
 }
 
 interface MetadataMap {
-  [key: number]: MetadataEntry;
+  [key: string]: MetadataEntry;
 }
 
 export type Category = {
@@ -21,21 +20,33 @@ export var categories: Category[] = [
     name: 'Poses',
     cover: 'covers/pose.jpg',
     metadata: {
-      1: {
+      'body_type': {
         name: 'Bodies',
-        key: 'body_type',
         values: [
           'Men',
           'Women',
           'Other',
         ],
       },
-      2: {
+      'garments': {
         name: 'Garments',
-        key: 'garments',
         values: [
           'Nude',
           'Clothed',
+        ],
+      },
+    },
+  },
+  {
+    id: 2,
+    name: 'Faces',
+    cover: 'covers/head.jpg',
+    metadata: {
+      'expression': {
+        name: 'Expression',
+        values: [
+          'Happy',
+          'Sad',
         ],
       },
     },
