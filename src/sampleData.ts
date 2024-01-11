@@ -8,7 +8,7 @@ interface MetadataMap {
 }
 
 export type Category = {
-  id: number,
+  id: string,
   name: string,
   cover?: string,
   metadata: MetadataMap,
@@ -16,7 +16,7 @@ export type Category = {
 
 export var categories: Category[] = [
   {
-    id: 1,
+    id: 'poses',
     name: 'Poses',
     cover: 'covers/pose.jpg',
     metadata: {
@@ -38,7 +38,7 @@ export var categories: Category[] = [
     },
   },
   {
-    id: 2,
+    id: 'faces',
     name: 'Faces',
     cover: 'covers/head.jpg',
     metadata: {
@@ -50,6 +50,21 @@ export var categories: Category[] = [
         ],
       },
     },
+  },
+  {
+    id: 'animals',
+    name: 'Animals',
+    metadata: {},
+  },
+  {
+    id: 'hands',
+    name: 'Hands',
+    metadata: {},
+  },
+  {
+    id: 'plants',
+    name: 'Plants',
+    metadata: {},
   },
 ]
 
