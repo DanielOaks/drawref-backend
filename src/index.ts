@@ -31,7 +31,7 @@ app.get("/api/categories", (req: Request, res: Response) => {
   res.send(categories);
 });
 app.get("/api/categories/:id", (req: Request, res: Response) => {
-  var id = parseInt(req.params.id || '0')
+  var id = req.params.id || ''
   var selectedCat: Category = categories.filter(cat => cat.id === id)[0]
 
   res.send(selectedCat || {error: true, message: 'Category not found'});
