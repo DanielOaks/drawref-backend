@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import cors from 'cors';
 import dotenv from "dotenv";
 import urlJoin from 'url-join';
 
@@ -17,6 +18,8 @@ categories.forEach(cat => {
 images.forEach(img => {
   img.path = urlJoin(hostBaseURL, img.path)
 })
+
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   res.send({
