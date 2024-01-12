@@ -8,7 +8,8 @@ COPY package.json yarn.lock .
 RUN yarn
 
 # copy other files
-COPY tsconfig.json src public .
+COPY tsconfig.json src .
+COPY public ./public
 
 EXPOSE 3300
 RUN yarn build
