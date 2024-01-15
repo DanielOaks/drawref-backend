@@ -1,8 +1,8 @@
 # DrawRef
+
 This is a webapp that holds and presents images, for drawing reference. I'm building this app to learn how new backend and front-end technologies work.
 
 Here's where we'll be doing the planning and all.
-
 
 ## Initial definitions
 
@@ -16,7 +16,6 @@ Here's where we'll be doing the planning and all.
   - **Backend:** Express.js.
   - **Database:** Postgres.
   - **Login:** SSO with various services, not needed to access the site.
-
 
 ## Research
 
@@ -55,7 +54,6 @@ Admin users generally understand self-hosting, Docker images, importing content,
 
 Users are artists, may not be familiar with tech or the web, and are simply looking to draw with some references.
 
-
 ## Key features and functionality
 
 - Admin
@@ -80,30 +78,32 @@ Users are artists, may not be familiar with tech or the web, and are simply look
   - **Misc**
     - See favourited images.
 
-
 ## Pages
 
 MVP:
+
 - Selection page: Select category, images, and timing. Is the landing page.
 - Image page: Display the current image.
 - Register/Login page: Login via SSO. Account is auto-created if it doesn't exist.
 - Admin dashboard: Modify available categories and images.
 
 Extra:
+
 - Favourites page: Lists the user's favourite images.
 - About page: Has info about the site and project.
 - Credits page: Has info about where the images are from.
 
-
 ## API
 
 ### Upload API
+
 The Upload API lets admins upload images, which returns temporary image IDs, which should then be provided in image upload/creation calls on the User API.
 
 - `/image` `POST`: Upload an image.
 - `/bulk/image` `POST`: Upload multiple images.
 
 ### User API
+
 The User API lets you create and edit categories, upload images, and favourite images.
 
 - Authentication
@@ -120,7 +120,6 @@ The User API lets you create and edit categories, upload images, and favourite i
   - `/image/{id}/fave` `POST/DELETE`: Make this image a favourite, or un-favourite it.
   - `/bulk/images` `GET/POST/PUT/DELETE`: Bulk get/upload/edit/delete images.
   - `/fave/images` `GET`: Get all favourited images.
-
 
 ## Mockups
 
