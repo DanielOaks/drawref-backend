@@ -3,7 +3,7 @@
 
 import { randomBytes } from "crypto";
 
-const expirationSeconds = 60;
+const expirationSeconds = 120;
 
 export class TokenMap {
   tokens: Map<string, number>;

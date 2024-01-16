@@ -10,6 +10,7 @@ export const frontendURL = process.env.FRONTEND_BASEURL || "";
 
 export const githubClientId = process.env.GITHUB_CLIENT_ID;
 export const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+export const githubAdminUids = (process.env.GITHUB_ADMIN_UIDS || "").split(" ").map((uid) => parseInt(uid));
 export const githubActive = githubClientId && githubClientSecret;
 
 if (!process.env.PASETO_LOCAL_KEY) {

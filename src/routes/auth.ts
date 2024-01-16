@@ -56,17 +56,14 @@ router.get("/github/callback", async (req: Request, res: Response) => {
   }
 
   // assemble token and return it
-  const expirationTime = new Date().getTime() + loginExpirationSeconds * 1000;
-  const tokenData = Buffer.from(
-    JSON.stringify({
-      iss: "gh",
-      exp: expirationTime,
-      id: profileData.id,
-      name: profileData.name,
-    }),
-    "utf-8",
-  );
-  const token = await V3.encrypt(tokenData, pasetoLocalKey);
+  const tokenData = {
+    from: "gh",
+    uid: profileData.id,
+    name: profileData.name,
+  };
+  const token = await V3.encrypt(tokenData, pasetoLocalKey, {
+    expiresIn: "24h",
+  });
 
   res.redirect(
     `${loginSuccessfulURL}?${querystring.stringify({
