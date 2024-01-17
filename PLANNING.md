@@ -107,7 +107,8 @@ The Upload API lets admins upload images, which returns temporary image IDs, whi
 The User API lets you create and edit categories, upload images, and favourite images.
 
 - Authentication
-  - ... SSO login via OAuth? ...
+  - SSO login via OAuth, done through redirections to/from frontend.
+  - Retrieved token is used as HTTP Bearer auth.
 - Session
   - `/session` `GET`: Get set of images for a session.
 - Categories
