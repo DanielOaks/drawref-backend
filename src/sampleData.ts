@@ -1,17 +1,14 @@
-type MetadataEntry = {
+type TagEntry = {
+  id: string;
   name: string;
   values: string[];
 };
-
-interface MetadataMap {
-  [key: string]: MetadataEntry;
-}
 
 export type Category = {
   id: string;
   name: string;
   cover?: string;
-  metadata: MetadataMap;
+  tags: TagEntry[];
 };
 
 export var categories: Category[] = [
@@ -19,42 +16,45 @@ export var categories: Category[] = [
     id: "poses",
     name: "Poses",
     cover: "covers/pose.jpg",
-    metadata: {
-      body_type: {
+    tags: [
+      {
+        id: "bodies",
         name: "Bodies",
         values: ["Men", "Women", "Other"],
       },
-      garments: {
+      {
+        id: "garments",
         name: "Garments",
         values: ["Nude", "Clothed"],
       },
-    },
+    ],
   },
   {
     id: "faces",
     name: "Faces",
     cover: "covers/head.jpg",
-    metadata: {
-      expression: {
+    tags: [
+      {
+        id: "expression",
         name: "Expression",
         values: ["Happy", "Sad"],
       },
-    },
+    ],
   },
   {
     id: "animals",
     name: "Animals",
-    metadata: {},
+    tags: [],
   },
   {
     id: "hands",
     name: "Hands",
-    metadata: {},
+    tags: [],
   },
   {
     id: "plants",
     name: "Plants",
-    metadata: {},
+    tags: [],
   },
 ];
 

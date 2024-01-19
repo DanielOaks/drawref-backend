@@ -11,9 +11,34 @@ categories.forEach((cat) => {
 
 export const router = express.Router();
 
+router.post("/", (req: Request, res: Response) => {
+  console.log("creating new category", req.body);
+  if (!req.body.id || !req.body.name) {
+    res.status(400);
+    res.json({
+      error: "Required parameters not supplied.",
+    });
+    return;
+  }
+
+  if (categories.filter((cat) => cat.id === req.body.id).length > 0) {
+    res.status(400);
+    res.json({
+      error: "Category already exists.",
+    });
+    return;
+  }
+
+  categories.push(req.body);
+  res.json({
+    id: req.body.id,
+  });
+});
+
 router.get("/", (req: Request, res: Response) => {
   res.send(categories);
 });
+
 router.get("/:id", (req: Request, res: Response) => {
   var id = req.params.id || "";
   var selectedCat: Category = categories.filter((cat) => cat.id === id)[0];
