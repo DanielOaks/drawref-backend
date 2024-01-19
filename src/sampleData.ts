@@ -44,6 +44,7 @@ export var categories: Category[] = [
   {
     id: "animals",
     name: "Animals",
+    cover: "covers/animals.jpg",
     tags: [],
   },
   {
