@@ -15,7 +15,7 @@ router.post("/", needAdmin, async (req: Request, res: Response) => {
     return;
   }
 
-  const { id: cId, name: cName, image: cImage } = req.body;
+  const { id: cId, name: cName, cover: cImage } = req.body;
   const cTags: Array<TagEntry> = req.body.tags;
 
   if (cId === "" || cName === "") {

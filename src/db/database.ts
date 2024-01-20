@@ -1,6 +1,8 @@
 import postgres from "postgres";
 
 import { Category, TagEntry } from "../types/drawref.js";
+import urlJoin from "url-join";
+import { hostBaseURL } from "../config/env.js";
 
 let db: Database;
 
@@ -11,6 +13,9 @@ class Database {
     this.sql = postgres(url, options);
   }
 
+  // Categories
+  //
+
   async addCategory(id: string, name: string, cover: number, tags: Array<TagEntry>): Promise<string | undefined> {
     var newId: string = "";
     try {
@@ -18,7 +23,7 @@ class Database {
         insert into categories
           (id, display_name, cover_image, tags)
         values
-          (${id}, ${name}, ${cover || -1}, ${JSON.stringify(tags)})
+          (${id}, ${name}, ${cover}, ${JSON.stringify(tags)})
         returning id
       `;
       newId = row[0]?.id;
@@ -37,20 +42,53 @@ class Database {
       select *
       from categories
     `;
-    rows.forEach((row) => {
-      var cat = {
+    for (const row of rows) {
+      var cat: Category = {
         id: row.id,
         name: row.display_name,
         tags: JSON.parse(row.tags || "[]"),
+        cover: "",
       };
       if (row.cover_image != -1) {
         // load image data and apply to cat
+        const ciRows = await this.sql`
+          select path, external_url
+          from images
+          where id = ${row.cover_image}
+        `;
+        if (ciRows[0].path) {
+          cat.cover = urlJoin(hostBaseURL, ciRows[0].path);
+        } else if (ciRows[0].external_url) {
+          cat.cover = ciRows[0].external_url;
+        }
       }
 
       categories.push(cat);
-    });
+    }
 
     return categories;
+  }
+
+  // Images
+  //
+
+  async addImage(path: string, external_url: string, author: string): Promise<number | undefined> {
+    var newId: number;
+    try {
+      const row = await this.sql`
+        insert into images
+          (path, external_url, author)
+        values
+          (${path}, ${external_url}, ${author})
+        returning id
+      `;
+      newId = row[0]?.id;
+    } catch (error) {
+      // error
+      console.error(error);
+      return;
+    }
+    return newId;
   }
 }
 

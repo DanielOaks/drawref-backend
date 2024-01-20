@@ -1,17 +1,27 @@
+import { mkdir } from "node:fs/promises";
 import express, { Express } from "express";
 import cors from "cors";
 
 import { initialiseDatabase } from "./db/database.js";
 import { authenticate } from "./auth/bearerMiddleware.js";
-import { port, hostBaseURL, databaseUrl } from "./config/env.js";
+import { port, hostBaseURL, databaseUrl, uploadPathTmp, uploadPathFinal } from "./config/env.js";
 import { router as authRouter } from "./routes/auth.js";
 import { router as categoriesRouter } from "./routes/categories.js";
+import { router as imagesRouter } from "./routes/images.js";
 import { router as sessionRouter } from "./routes/session.js";
 import { router as testRouter } from "./routes/test.js";
 import { router as userRouter } from "./routes/user.js";
 import { router as uploadRouter } from "./routes/upload.js";
 
 initialiseDatabase(databaseUrl);
+
+// make directories for image uploads
+await mkdir(uploadPathTmp, {
+  recursive: true,
+});
+await mkdir(uploadPathFinal, {
+  recursive: true,
+});
 
 const app: Express = express();
 
@@ -23,11 +33,12 @@ app.use("/upload", uploadRouter);
 
 app.use("/api/auth", authRouter);
 app.use("/api/categories", categoriesRouter);
+app.use("/api/image", imagesRouter);
 app.use("/api/session", sessionRouter);
 app.use("/api/user", userRouter);
 app.use("/api", testRouter);
 
-// mostly for testing
+// intended mostly for dev testing
 app.use("/images", express.static("public"));
 
 app.listen(port, () => {

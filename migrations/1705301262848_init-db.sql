@@ -2,25 +2,25 @@
 CREATE TABLE categories (
   id text primary key,
   display_name text,
-  cover_image integer,
+  cover_image integer default -1,
   tags jsonb
 );
 
 CREATE TABLE images (
-  id integer primary key,
+  id serial primary key,
   path text,
   external_url text,
   author text
 );
 
 CREATE TABLE image_tags (
-  category_id text,
-  image_id integer,
+  category_id text references categories(id),
+  image_id integer references images(id),
   tags jsonb,
   primary key (category_id, image_id)
 );
 
 -- Down Migration
+DROP TABLE image_tags;
 DROP TABLE categories;
 DROP TABLE images;
-DROP TABLE image_tags;
