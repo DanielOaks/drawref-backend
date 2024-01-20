@@ -1,19 +1,8 @@
 import postgres from "postgres";
 
+import { Category, TagEntry } from "../types/drawref.js";
+
 let db: Database;
-
-export type Category = {
-  id: string;
-  name: string;
-  cover?: string;
-  tags?: TagEntry[];
-};
-
-export type TagEntry = {
-  id: string;
-  name: string;
-  values: string[];
-};
 
 class Database {
   private sql: postgres.Sql;

@@ -9,6 +9,7 @@ import { router as categoriesRouter } from "./routes/categories.js";
 import { router as sessionRouter } from "./routes/session.js";
 import { router as testRouter } from "./routes/test.js";
 import { router as userRouter } from "./routes/user.js";
+import { router as uploadRouter } from "./routes/upload.js";
 
 initialiseDatabase(databaseUrl);
 
@@ -17,6 +18,8 @@ const app: Express = express();
 app.use(authenticate);
 app.use(cors());
 app.use(express.json());
+
+app.use("/upload", uploadRouter);
 
 app.use("/api/auth", authRouter);
 app.use("/api/categories", categoriesRouter);
