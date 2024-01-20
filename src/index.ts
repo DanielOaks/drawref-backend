@@ -1,13 +1,16 @@
 import express, { Express } from "express";
 import cors from "cors";
 
+import { initialiseDatabase } from "./db/database.js";
 import { authenticate } from "./auth/bearerMiddleware.js";
-import { port, hostBaseURL } from "./config/env.js";
+import { port, hostBaseURL, databaseUrl } from "./config/env.js";
 import { router as authRouter } from "./routes/auth.js";
 import { router as categoriesRouter } from "./routes/categories.js";
 import { router as sessionRouter } from "./routes/session.js";
 import { router as testRouter } from "./routes/test.js";
 import { router as userRouter } from "./routes/user.js";
+
+initialiseDatabase(databaseUrl);
 
 const app: Express = express();
 

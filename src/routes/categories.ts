@@ -1,18 +1,11 @@
 import express, { Request, Response } from "express";
-import urlJoin from "url-join";
 
-import { hostBaseURL } from "../config/env.js";
-import { categories, Category } from "../sampleData.js";
-
-// fixup sample image URLs
-categories.forEach((cat) => {
-  cat.cover = cat.cover ? urlJoin(hostBaseURL, cat.cover) : undefined;
-});
+import { useDatabase, TagEntry } from "../db/database.js";
+import { Category } from "../sampleData.js";
 
 export const router = express.Router();
 
-router.post("/", (req: Request, res: Response) => {
-  console.log("creating new category", req.body);
+router.post("/", async (req: Request, res: Response) => {
   if (!req.body.id || !req.body.name) {
     res.status(400);
     res.json({
@@ -21,27 +14,45 @@ router.post("/", (req: Request, res: Response) => {
     return;
   }
 
-  if (categories.filter((cat) => cat.id === req.body.id).length > 0) {
+  const { id: cId, name: cName, image: cImage } = req.body;
+  const cTags: Array<TagEntry> = req.body.tags;
+
+  if (cId === "" || cName === "") {
     res.status(400);
     res.json({
-      error: "Category already exists.",
+      error: "ID and name must be provided.",
     });
     return;
   }
 
-  categories.push(req.body);
+  const db = useDatabase();
+  const new_id = await db.addCategory(cId, cName, cImage, cTags);
+
+  if (!new_id) {
+    res.status(400);
+    res.json({
+      error: "Couldn't create category. Maybe it already exists.",
+    });
+    return;
+  }
+
   res.json({
-    id: req.body.id,
+    id: new_id,
   });
 });
 
-router.get("/", (req: Request, res: Response) => {
-  res.send(categories);
+router.get("/", async (req: Request, res: Response) => {
+  const db = useDatabase();
+  const categories = await db.getCategories();
+
+  res.json(categories);
 });
 
-router.get("/:id", (req: Request, res: Response) => {
+router.get("/:id", async (req: Request, res: Response) => {
   var id = req.params.id || "";
+  const db = useDatabase();
+  const categories = await db.getCategories();
   var selectedCat: Category = categories.filter((cat) => cat.id === id)[0];
 
-  res.send(selectedCat || { error: true, message: "Category not found" });
+  res.json(selectedCat || { error: true, message: "Category not found" });
 });

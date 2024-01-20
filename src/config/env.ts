@@ -8,6 +8,13 @@ export const myURL = process.env.MY_BASEURL || "";
 export const hostBaseURL = process.env.HOST_BASEURL || "";
 export const frontendURL = process.env.FRONTEND_BASEURL || "";
 
+if (!process.env.DATABASE_URL) {
+  console.log("Postgres database must be defined in the DATABASE_URL environment variable.");
+  console.log("Closing server");
+  process.exit();
+}
+export const databaseUrl = process.env.DATABASE_URL;
+
 export const githubClientId = process.env.GITHUB_CLIENT_ID;
 export const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
 export const githubAdminUids = (process.env.GITHUB_ADMIN_UIDS || "").split(" ").map((uid) => parseInt(uid));

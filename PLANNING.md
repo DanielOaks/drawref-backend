@@ -117,6 +117,7 @@ The User API lets you create and edit categories, upload images, and favourite i
   - `/category/{id}` `GET/PUT/DELETE`: Get, edit, or delete a category.
 - Images
   - `/image` `POST`: Upload an image.
+    - Provide either random image ID returned by the Upload API, or external URL.
   - `/image/{id}` `GET/PUT/DELETE`: Get, edit, or delete an image.
   - `/image/{id}/fave` `POST/DELETE`: Make this image a favourite, or un-favourite it.
   - `/bulk/images` `GET/POST/PUT/DELETE`: Bulk get/upload/edit/delete images.
