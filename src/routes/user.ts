@@ -1,15 +1,9 @@
 import express, { Request, Response } from "express";
 
+import { needLoggedIn } from "../auth/authRequiredMiddleware.js";
+
 export const router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
-  if (!req.user) {
-    res.status(401);
-    res.send({
-      message: "Authentication required",
-    });
-    return;
-  }
-
+router.get("/", needLoggedIn, (req: Request, res: Response) => {
   res.send(req.user);
 });

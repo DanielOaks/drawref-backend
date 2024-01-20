@@ -1,19 +1,12 @@
 import express, { Request, Response } from "express";
 
+import { needAdmin } from "../auth/authRequiredMiddleware.js";
 import { useDatabase } from "../db/database.js";
 import { Category, TagEntry } from "../types/drawref.js";
 
 export const router = express.Router();
 
-router.post("/", async (req: Request, res: Response) => {
-  if (!req.user?.admin) {
-    res.status(401);
-    res.send({
-      message: "Authentication required",
-    });
-    return;
-  }
-
+router.post("/", needAdmin, async (req: Request, res: Response) => {
   if (!req.body.id || !req.body.name) {
     res.status(400);
     res.json({
