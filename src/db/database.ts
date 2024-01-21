@@ -23,7 +23,7 @@ class Database {
         insert into categories
           (id, display_name, cover_image, tags)
         values
-          (${id}, ${name}, ${cover}, ${JSON.stringify(tags)})
+          (${id}, ${name}, ${cover === undefined ? -1 : cover}, ${JSON.stringify(tags)})
         returning id
       `;
       newId = row[0]?.id;
