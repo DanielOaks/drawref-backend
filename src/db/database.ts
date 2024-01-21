@@ -35,12 +35,31 @@ class Database {
     return newId;
   }
 
+  async editCategory(id: string, name: string, cover: number, tags: Array<TagEntry>): Promise<string | undefined> {
+    try {
+      await this.sql`
+        update categories
+        set
+          display_name = ${name},
+          cover_image = ${cover === undefined ? -1 : cover},
+          tags = ${JSON.stringify(tags)}
+        where id = ${id}
+      `;
+    } catch (error) {
+      // error
+      console.error(error);
+      return `Error: ${error}`;
+    }
+    return;
+  }
+
   async getCategories() {
     var categories: Category[] = [];
 
     const rows = await this.sql`
       select *
       from categories
+      order by id desc
     `;
     for (const row of rows) {
       var cat: Category = {

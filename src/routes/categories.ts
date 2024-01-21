@@ -42,6 +42,35 @@ router.post("/", needAdmin, async (req: Request, res: Response) => {
   });
 });
 
+router.put("/:id", async (req: Request, res: Response) => {
+  var id = req.params.id || "";
+  const { name: cName, cover: cImage } = req.body;
+  const cTags: Array<TagEntry> = req.body.tags;
+
+  if (cName === "") {
+    res.status(400);
+    res.json({
+      error: "Name cannot be blank.",
+    });
+    return;
+  }
+
+  const db = useDatabase();
+  const error = await db.editCategory(id, cName, cImage, cTags);
+
+  if (error) {
+    res.status(400);
+    res.json({
+      error: "Couldn't edit category.",
+    });
+    return;
+  }
+
+  res.json({
+    id,
+  });
+});
+
 router.get("/", async (req: Request, res: Response) => {
   const db = useDatabase();
   const categories = await db.getCategories();
