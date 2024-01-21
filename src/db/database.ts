@@ -50,6 +50,7 @@ class Database {
         cover: "",
       };
       if (row.cover_image != -1) {
+        cat.cover_id = row.cover_image;
         // load image data and apply to cat
         const ciRows = await this.sql`
           select path, external_url
