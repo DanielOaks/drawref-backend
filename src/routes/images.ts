@@ -2,9 +2,10 @@ import express, { Request, Response } from "express";
 import { renameSync } from "fs";
 import { join } from "path";
 
-import { uploadPathTmp, uploadPathFinal } from "../config/env.js";
+import { uploadPathTmp, uploadPathFinal, hostBaseURL } from "../config/env.js";
 import { needAdmin } from "../auth/authRequiredMiddleware.js";
 import { useDatabase } from "../db/database.js";
+import urlJoin from "url-join";
 
 export const router = express.Router();
 
@@ -46,5 +47,6 @@ router.post("/", needAdmin, async (req: Request, res: Response) => {
 
   res.json({
     id: new_id,
+    url: iExternalUrl ? iExternalUrl : urlJoin(hostBaseURL, iPath),
   });
 });
