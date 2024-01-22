@@ -2,9 +2,30 @@ import express, { Request, Response } from "express";
 
 import { needAdmin } from "../auth/authRequiredMiddleware.js";
 import { useDatabase } from "../db/database.js";
-import { Category, TagEntry } from "../types/drawref.js";
+import { Category, TagEntry, TagMap } from "../types/drawref.js";
 
 export const router = express.Router();
+
+router.post("/:category/images/:image", needAdmin, async (req: Request, res: Response) => {
+  const category = req.params.category || "";
+  const image = parseInt(req.params.image || "-1");
+  const tags: TagMap = req.body.tags;
+
+  if (!category || image === -1) {
+    res.status(400);
+    res.json({
+      error: "Required parameters not supplied.",
+    });
+    return;
+  }
+
+  const db = useDatabase();
+  await db.addImageToCategory(category, image, tags);
+
+  res.json({
+    ok: true,
+  });
+});
 
 router.post("/", needAdmin, async (req: Request, res: Response) => {
   if (!req.body.id || !req.body.name) {

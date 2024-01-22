@@ -16,11 +16,11 @@ CREATE TABLE images (
 CREATE TABLE image_tags (
   category_id text references categories(id),
   image_id integer references images(id),
-  tags jsonb,
+  tags text[] not null default '{}',
   primary key (category_id, image_id)
 );
 
 -- Down Migration
 DROP TABLE image_tags;
-DROP TABLE categories;
 DROP TABLE images;
+DROP TABLE categories;

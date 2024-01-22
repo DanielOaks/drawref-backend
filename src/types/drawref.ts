@@ -4,6 +4,8 @@ export type TagEntry = {
   values: string[];
 };
 
+export type TagMap = Record<string, string[]>;
+
 export type Category = {
   id: string;
   name: string;

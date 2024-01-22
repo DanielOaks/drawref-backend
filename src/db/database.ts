@@ -1,6 +1,6 @@
 import postgres from "postgres";
 
-import { Category, TagEntry } from "../types/drawref.js";
+import { Category, TagEntry, TagMap } from "../types/drawref.js";
 import urlJoin from "url-join";
 import { hostBaseURL } from "../config/env.js";
 
@@ -109,6 +109,25 @@ class Database {
       return;
     }
     return newId;
+  }
+
+  async addImageToCategory(category: string, image: number, tags: TagMap) {
+    var tagsForDb: Array<string> = [];
+    Object.entries(tags).forEach(([key, values]) => {
+      tagsForDb = tagsForDb.concat(values.map((value) => `${key} ${value}`));
+    });
+
+    try {
+      await this.sql`
+        insert into image_tags
+          (category_id, image_id, tags)
+        values
+          (${category}, ${image}, ${tagsForDb})
+      `;
+    } catch (error) {
+      // error
+      console.error(error);
+    }
   }
 }
 
