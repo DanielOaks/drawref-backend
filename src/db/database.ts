@@ -4,6 +4,14 @@ import { Category, Image, TagEntry, TagMap } from "../types/drawref.js";
 import urlJoin from "url-join";
 import { hostBaseURL } from "../config/env.js";
 
+function tagMapToDbTags(tags: TagMap): string[] {
+  var tagsForDb: Array<string> = [];
+  Object.entries(tags).forEach(([key, values]) => {
+    tagsForDb = tagsForDb.concat(values.map((value) => `${key} ${value}`));
+  });
+  return tagsForDb;
+}
+
 let db: Database;
 
 class Database {
@@ -113,10 +121,7 @@ class Database {
   }
 
   async addImageToCategory(category: string, image: number, tags: TagMap) {
-    var tagsForDb: Array<string> = [];
-    Object.entries(tags).forEach(([key, values]) => {
-      tagsForDb = tagsForDb.concat(values.map((value) => `${key} ${value}`));
-    });
+    const tagsForDb = tagMapToDbTags(tags);
 
     try {
       await this.sql`
@@ -172,19 +177,34 @@ class Database {
     return images;
   }
 
-  async getSessionImages(category: string): Promise<Image[]> {
+  async getSessionImages(category: string, tags: TagMap): Promise<Image[]> {
     var images: Image[] = [];
+    const tagsForDb = tagMapToDbTags(tags);
 
     // most sessions won't be more than 30 images, so this should be fine
-    const rows = await this.sql`
-      select image_id, path, external_url, author, author_url
-      from images
-      inner join image_tags
-        on images.id = image_tags.image_id
-      where image_tags.category_id = ${category}
-      order by RANDOM()
-      limit 30
-    `;
+    var rows: postgres.RowList<postgres.Row[]>;
+    if (tagsForDb.length === 0) {
+      rows = await this.sql`
+        select image_id, path, external_url, author, author_url
+        from images
+        inner join image_tags
+          on images.id = image_tags.image_id
+        where image_tags.category_id = ${category}
+        order by RANDOM()
+        limit 30
+      `;
+    } else {
+      rows = await this.sql`
+        select image_id, path, external_url, author, author_url
+        from images
+        inner join image_tags
+          on images.id = image_tags.image_id
+        where image_tags.category_id = ${category}
+        and image_tags.tags @> ${tagsForDb}
+        order by RANDOM()
+        limit 30
+      `;
+    }
     for (const row of rows) {
       var img: Image = {
         id: row.image_id,

@@ -1,11 +1,13 @@
 import express, { Request, Response } from "express";
 
 import { useDatabase } from "../db/database.js";
+import { TagMap } from "../types/drawref.js";
 
 export const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
   const category = String(req.query.category) || "";
+  const tags: TagMap = JSON.parse(String(req.query.tags) || "{}");
 
   if (!category) {
     res.status(400);
@@ -16,7 +18,7 @@ router.get("/", async (req: Request, res: Response) => {
   }
 
   const db = useDatabase();
-  const images = await db.getSessionImages(category);
+  const images = await db.getSessionImages(category, tags);
 
   res.send(images);
 });
