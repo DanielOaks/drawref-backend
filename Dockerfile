@@ -9,9 +9,9 @@ RUN yarn
 
 # copy other files
 COPY tsconfig.json src .
+COPY docker/startup.sh .
 COPY public ./public
 
 EXPOSE 3300
 RUN yarn build
-RUN yarn migrate up
-CMD [ "yarn", "start"]
+CMD [ "./startup.sh" ]
