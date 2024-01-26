@@ -8,7 +8,7 @@ COPY package.json yarn.lock .
 RUN yarn
 
 # copy other files
-COPY tsconfig.json src .
+COPY tsconfig.json src migrations .
 COPY docker/startup.sh .
 COPY public ./public
 
