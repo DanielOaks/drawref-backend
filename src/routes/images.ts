@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { renameSync } from "fs";
+import { copyFileSync } from "fs";
 import { join } from "path";
 
 import { uploadPathTmp, uploadPathFinal, hostBaseURL } from "../config/env.js";
@@ -25,7 +25,7 @@ router.post("/", needAdmin, async (req: Request, res: Response) => {
 
   // move image to the live directory
   try {
-    renameSync(join(uploadPathTmp, iPath), join(uploadPathFinal, iPath));
+    copyFileSync(join(uploadPathTmp, iPath), join(uploadPathFinal, iPath));
   } catch (error) {
     console.error("Failed to rename:", error);
     res.status(400);
