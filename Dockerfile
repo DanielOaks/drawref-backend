@@ -13,4 +13,5 @@ COPY public ./public
 
 EXPOSE 3300
 RUN yarn build
+RUN yarn migrate up
 CMD [ "yarn", "start"]
