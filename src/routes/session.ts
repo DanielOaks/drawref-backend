@@ -1,16 +1,22 @@
 import express, { Request, Response } from "express";
-import urlJoin from "url-join";
 
-import { hostBaseURL } from "../config/env.js";
-import { images } from "../sampleData.js";
-
-// fixup sample image URLs
-images.forEach((img) => {
-  img.path = urlJoin(hostBaseURL, "..", img.path);
-});
+import { useDatabase } from "../db/database.js";
 
 export const router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
+  const category = String(req.query.category) || "";
+
+  if (!category) {
+    res.status(400);
+    res.json({
+      error: "Required parameters not supplied.",
+    });
+    return;
+  }
+
+  const db = useDatabase();
+  const images = await db.getSessionImages(category);
+
   res.send(images);
 });

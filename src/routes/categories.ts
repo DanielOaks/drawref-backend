@@ -27,6 +27,26 @@ router.post("/:category/images/:image", needAdmin, async (req: Request, res: Res
   });
 });
 
+router.delete("/:category/images/:image", needAdmin, async (req: Request, res: Response) => {
+  const category = req.params.category || "";
+  const image = parseInt(req.params.image || "-1");
+
+  if (!category || image === -1) {
+    res.status(400);
+    res.json({
+      error: "Required parameters not supplied.",
+    });
+    return;
+  }
+
+  const db = useDatabase();
+  await db.deleteImageFromCategory(category, image);
+
+  res.json({
+    ok: true,
+  });
+});
+
 router.get("/:category/images", async (req: Request, res: Response) => {
   const category = req.params.category || "";
 

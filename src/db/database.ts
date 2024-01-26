@@ -131,10 +131,23 @@ class Database {
     }
   }
 
+  async deleteImageFromCategory(category: string, image: number) {
+    try {
+      await this.sql`
+        delete from image_tags
+        where
+          category_id = ${category} and
+          image_id = ${image}
+      `;
+    } catch (error) {
+      // error
+      console.error(error);
+    }
+  }
+
   async getCategoryImages(category: string, page: number): Promise<Image[]> {
     var images: Image[] = [];
 
-    //TODO: make this one query, using joins etc
     const rows = await this.sql`
       select image_id, path, external_url, author, author_url, image_tags.tags
       from images
@@ -151,8 +164,34 @@ class Database {
         author_url: row.author_url || "",
       };
 
-      //TODO: process tags
+      //TODO: turn tag list back into TagMap
 
+      images.push(img);
+    }
+
+    return images;
+  }
+
+  async getSessionImages(category: string): Promise<Image[]> {
+    var images: Image[] = [];
+
+    // most sessions won't be more than 30 images, so this should be fine
+    const rows = await this.sql`
+      select image_id, path, external_url, author, author_url
+      from images
+      inner join image_tags
+        on images.id = image_tags.image_id
+      where image_tags.category_id = ${category}
+      order by RANDOM()
+      limit 30
+    `;
+    for (const row of rows) {
+      var img: Image = {
+        id: row.image_id,
+        path: row.path ? urlJoin(hostBaseURL, row.path) : row.external_url,
+        author: row.author || "",
+        author_url: row.author_url || "",
+      };
       images.push(img);
     }
 
