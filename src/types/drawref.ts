@@ -14,7 +14,10 @@ export type Category = {
   tags?: TagEntry[];
 };
 
-export type SessionImage = {
+export type Image = {
+  id: number;
   path: string;
   author: string;
+  author_url: string;
+  tags?: TagMap;
 };

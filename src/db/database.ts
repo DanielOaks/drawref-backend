@@ -1,6 +1,6 @@
 import postgres from "postgres";
 
-import { Category, TagEntry, TagMap } from "../types/drawref.js";
+import { Category, Image, TagEntry, TagMap } from "../types/drawref.js";
 import urlJoin from "url-join";
 import { hostBaseURL } from "../config/env.js";
 
@@ -56,6 +56,7 @@ class Database {
   async getCategories() {
     var categories: Category[] = [];
 
+    //TODO: make this one query, using joins etc
     const rows = await this.sql`
       select *
       from categories
@@ -92,14 +93,14 @@ class Database {
   // Images
   //
 
-  async addImage(path: string, external_url: string, author: string): Promise<number | undefined> {
+  async addImage(path: string, external_url: string, author: string, author_url: string): Promise<number | undefined> {
     var newId: number;
     try {
       const row = await this.sql`
         insert into images
-          (path, external_url, author)
+          (path, external_url, author, author_url)
         values
-          (${path}, ${external_url}, ${author})
+          (${path}, ${external_url}, ${author}, ${author_url})
         returning id
       `;
       newId = row[0]?.id;
@@ -128,6 +129,34 @@ class Database {
       // error
       console.error(error);
     }
+  }
+
+  async getCategoryImages(category: string, page: number): Promise<Image[]> {
+    var images: Image[] = [];
+
+    //TODO: make this one query, using joins etc
+    const rows = await this.sql`
+      select image_id, path, external_url, author, author_url, image_tags.tags
+      from images
+      inner join image_tags
+        on images.id = image_tags.image_id
+      where image_tags.category_id = ${category}
+      order by image_tags.created_at desc
+    `;
+    for (const row of rows) {
+      var img: Image = {
+        id: row.image_id,
+        path: row.path ? urlJoin(hostBaseURL, row.path) : row.external_url,
+        author: row.author || "",
+        author_url: row.author_url || "",
+      };
+
+      //TODO: process tags
+
+      images.push(img);
+    }
+
+    return images;
   }
 }
 

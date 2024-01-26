@@ -12,7 +12,8 @@ export const router = express.Router();
 router.post("/", needAdmin, async (req: Request, res: Response) => {
   const iPath = req.body.path || "";
   const iExternalUrl = req.body.external_url || "";
-  const iAuthor = req.body.author;
+  const iAuthor = req.body.author || "";
+  const iAuthorUrl = req.body.author_url || "";
 
   if ((!req.body.path && !req.body.external_url) || req.body.author === undefined) {
     res.status(400);
@@ -35,7 +36,7 @@ router.post("/", needAdmin, async (req: Request, res: Response) => {
   }
 
   const db = useDatabase();
-  const new_id = await db.addImage(iPath, iExternalUrl, iAuthor);
+  const new_id = await db.addImage(iPath, iExternalUrl, iAuthor, iAuthorUrl);
 
   if (!new_id) {
     res.status(400);

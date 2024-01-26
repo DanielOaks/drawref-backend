@@ -27,6 +27,25 @@ router.post("/:category/images/:image", needAdmin, async (req: Request, res: Res
   });
 });
 
+router.get("/:category/images", async (req: Request, res: Response) => {
+  const category = req.params.category || "";
+
+  if (!category) {
+    res.status(400);
+    res.json({
+      error: "Required parameters not supplied.",
+    });
+    return;
+  }
+
+  const db = useDatabase();
+
+  //TODO: pull page number out from the query parameters
+  const images = await db.getCategoryImages(category, 0);
+
+  res.send(images);
+});
+
 router.post("/", needAdmin, async (req: Request, res: Response) => {
   if (!req.body.id || !req.body.name) {
     res.status(400);

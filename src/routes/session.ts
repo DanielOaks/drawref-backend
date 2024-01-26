@@ -6,7 +6,7 @@ import { images } from "../sampleData.js";
 
 // fixup sample image URLs
 images.forEach((img) => {
-  img.path = urlJoin(hostBaseURL, img.path);
+  img.path = urlJoin(hostBaseURL, "..", img.path);
 });
 
 export const router = express.Router();
