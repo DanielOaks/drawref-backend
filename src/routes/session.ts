@@ -7,7 +7,17 @@ export const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
   const category = String(req.query.category) || "";
-  const tags: TagMap = JSON.parse(String(req.query.tags) || "{}");
+  var tags: TagMap;
+  try {
+    tags = JSON.parse(String(req.query.tags) || "{}");
+  } catch (error) {
+    console.error("Failed to parse tags:", error);
+    res.status(400);
+    res.json({
+      error: "Couldn't parse tags.",
+    });
+    return;
+  }
 
   if (!category) {
     res.status(400);
@@ -25,7 +35,17 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.get("/count", async (req: Request, res: Response) => {
   const category = String(req.query.category) || "";
-  const tags: TagMap = JSON.parse(String(req.query.tags) || "{}");
+  var tags: TagMap;
+  try {
+    tags = JSON.parse(String(req.query.tags) || "{}");
+  } catch (error) {
+    console.error("Failed to parse tags:", error);
+    res.status(400);
+    res.json({
+      error: "Couldn't parse tags.",
+    });
+    return;
+  }
 
   if (!category) {
     res.status(400);
