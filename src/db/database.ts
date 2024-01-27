@@ -217,6 +217,32 @@ class Database {
 
     return images;
   }
+
+  async getSessionImageCount(category: string, tags: TagMap): Promise<number> {
+    const tagsForDb = tagMapToDbTags(tags);
+
+    // most sessions won't be more than 30 images, so this should be fine
+    var rows: postgres.RowList<postgres.Row[]>;
+    if (tagsForDb.length === 0) {
+      rows = await this.sql`
+        select count(*) as num
+        from images
+        inner join image_tags
+          on images.id = image_tags.image_id
+        where image_tags.category_id = ${category}
+      `;
+    } else {
+      rows = await this.sql`
+        select count(*) as num
+        from images
+        inner join image_tags
+          on images.id = image_tags.image_id
+        where image_tags.category_id = ${category}
+        and image_tags.tags @> ${tagsForDb}
+      `;
+    }
+    return rows[0].num;
+  }
 }
 
 export function initialiseDatabase(url: string, options?: postgres.Options<{}>) {
