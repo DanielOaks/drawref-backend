@@ -21,3 +21,22 @@ export type Image = {
   author_url: string;
   tags?: TagMap;
 };
+
+export type SampleProviderEntry = {
+  author: string;
+  author_url: string;
+  images: SampleCategoryEntry[];
+};
+
+export type SampleCategoryEntry = {
+  category: string;
+  images: SampleImage[];
+};
+
+export type SampleImage = {
+  // path is relative to './public/sample'
+  path: string;
+
+  // db tags
+  tags?: string[];
+};

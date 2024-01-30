@@ -124,6 +124,29 @@ The User API lets you create and edit categories, upload images, and favourite i
   - `/bulk/images` `GET/POST/PUT/DELETE`: Bulk get/upload/edit/delete images.
   - `/fave/images` `GET`: Get all favourited images.
 
+## Sample data
+
+I'm lucky enough to be able to bundle some sample images with this app – have reached out to a few people who take reference images and they've allowed me to include them.
+
+However, this means we need to ask the question: How and where should we store sample data? The sample images have categories and tags associated with them, and those categories with those tags should exist before the sample images are imported.
+
+Today, the category templates are stored on the frontend repo, and it may make sense to have the category templates and sample data stored in one place... Let's have a think about this.
+
+### Possible approaches
+
+- Keep all data on Backend.
+  - Easy to copy all sample data to the `FINAL_UPLOAD_PATH`.
+  - Import process can be one API call to the backend, simple from the frontend.
+  - Need to expose category templates via the API.
+- Keep all data on Frontend.
+  - When importing sample data, need to upload every image separately.
+  - More risk of sample data import failing during this process.
+  - Category templates are embedded, can just import them.
+- Keep some data on both sides.
+  - Worst option, super easy for them to become out of sync if the backend and frontend version don't match exactly.
+
+With the above in mind, it makes the most sense to keep all sample data and category templates on the backend. I'll start the process for moving the category templates over.
+
 ## Mockups
 
 ### Initial sketches
