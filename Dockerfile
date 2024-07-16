@@ -11,7 +11,7 @@ RUN yarn
 COPY tsconfig.json docker/startup.sh .
 COPY src ./src
 COPY migrations ./migrations
-COPY public ./public
+COPY samples ./samples
 
 EXPOSE 3300
 RUN yarn build
