@@ -1,4 +1,3 @@
-import { mkdir } from "node:fs/promises";
 import express, { Express } from "express";
 import cors from "cors";
 
@@ -8,12 +7,12 @@ import { port, hostBaseURL, databaseUrl } from "./config/env.js";
 import { router as authRouter } from "./routes/auth.js";
 import { router as categoriesRouter } from "./routes/categories.js";
 import { router as imagesRouter } from "./routes/images.js";
+import { router as samplesRouter } from "./routes/samples.js";
 import { router as sessionRouter } from "./routes/session.js";
 import { router as testRouter } from "./routes/test.js";
 import { router as userRouter } from "./routes/user.js";
 import { router as uploadRouter } from "./routes/upload.js";
-
-import { confirmS3Works, uploadFile } from "./files/s3.js";
+import { confirmS3Works } from "./files/s3.js";
 
 if (!(await confirmS3Works())) {
   console.log("Could not connect to S3 and verify bucket connection.");
@@ -34,6 +33,7 @@ app.use("/upload", uploadRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/image", imagesRouter);
+app.use("/api/samples", samplesRouter);
 app.use("/api/session", sessionRouter);
 app.use("/api/user", userRouter);
 app.use("/api", testRouter);

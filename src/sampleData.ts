@@ -3,7 +3,76 @@
 //  appear as sample data with certain conditions applying.
 // check the LICENSE file for details.
 
-import { SampleProviderEntry } from "./types/drawref.js";
+import { Category, SampleProviderEntry } from "./types/drawref.js";
+
+type RawSampleCategory = {
+  name: string;
+  tags: string;
+};
+
+var rawSampleCategories: RawSampleCategory[] = [
+  {
+    name: "Poses",
+    tags: `
+    Bodies: Men, Women, Other
+    Clothing: Nude, Clothed
+    Energy: Action, Stationary`,
+  },
+  {
+    name: "Faces",
+    tags: `
+    Expression: Happy, Sad, Angry, Scared, Disgust, Surprise
+    Facial Hair: Facial Hair, No Facial Hair
+    Bodies: Men, Women, Other`,
+  },
+  {
+    name: "Animals",
+    tags: `
+    Species: Feline, Canine, Equine & Hooved, Avian, Aquatic, Rodents & Bunnies, Bugs and Insects, Primates
+    Skeletons: Skeletons, Live`,
+  },
+  {
+    name: "Hands & Feet",
+    tags: `
+    Focus: Hands, Feet
+    Bodies: Men, Women, Other`,
+  },
+  {
+    name: "Plants",
+    tags: `
+    Type: Flowers, Plants`,
+  },
+  {
+    name: "Basic Shapes",
+    tags: `
+    Lighting: Shading, Unlit`,
+  },
+  {
+    name: "Still Life",
+    tags: `
+    Subjects: One, Multiple`,
+  },
+];
+
+export var sampleCategories: Category[] = rawSampleCategories.map((info) => {
+  // this works. it's ugly, but it works.
+  return {
+    id: info.name.toLowerCase(),
+    name: info.name,
+    tags: info.tags
+      .trim()
+      .split("\n")
+      .map((l) => l.trim())
+      .map((tagNameAndList) => {
+        const tagNameInfo = tagNameAndList.split(":", 2);
+        return {
+          id: tagNameInfo[0].toLowerCase(),
+          name: tagNameInfo[0],
+          values: tagNameInfo[1].split(",").map((n) => n.trim()),
+        };
+      }),
+  };
+});
 
 export var sampleCategoryCovers = new Map<string, string>([
   ["poses", "pose.jpg"],
