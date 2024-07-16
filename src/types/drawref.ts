@@ -25,6 +25,7 @@ export type Image = {
 export type SampleProviderEntry = {
   author: string;
   author_url: string;
+  requirement: string;
   images: SampleCategoryEntry[];
 };
 

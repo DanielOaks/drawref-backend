@@ -3,19 +3,20 @@
 //  appear as sample data with certain conditions applying.
 // check the LICENSE file for details.
 
-import { SampleProviderEntry, SampleImage } from "./types/drawref.js";
+import { SampleProviderEntry } from "./types/drawref.js";
 
-export var categoryCovers = new Map<string, string>([
+export var sampleCategoryCovers = new Map<string, string>([
   ["poses", "pose.jpg"],
   ["faces", "head.jpg"],
   ["animals", "animals.jpg"],
 ]);
 
-export var samples: SampleProviderEntry[] = [
+export var sampleImages: SampleProviderEntry[] = [
   // adorkastock
   {
     author: "AdorkaStock",
     author_url: "https://www.adorkastock.com/",
+    requirement: "",
     images: [
       {
         category: "poses",
@@ -65,6 +66,7 @@ export var samples: SampleProviderEntry[] = [
   {
     author: "JookpubStock",
     author_url: "https://jookpubstock.com",
+    requirement: "This site is completely free to access.",
     images: [],
   },
 ];
