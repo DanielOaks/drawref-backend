@@ -19,7 +19,15 @@ export const databaseUrl = process.env.DATABASE_URL;
 
 // image uploading
 export const uploadPathTmp = process.env.TMP_UPLOAD_PATH || "./tmp";
-export const uploadPathFinal = process.env.FINAL_UPLOAD_PATH || "./public/images";
+export const uploadBucket = process.env.UPLOAD_S3_BUCKET;
+export const uploadKeyPrefix = process.env.UPLOAD_KEY_PREFIX || "/";
+export const uploadUrlPrefix = process.env.UPLOAD_URL_PREFIX || "";
+
+if (!uploadBucket || uploadUrlPrefix === "") {
+  console.log("Upload details must be defined in the UPLOAD_S3_BUCKET and UPLOAD_URL_PREFIX environment variables.");
+  console.log("Closing server");
+  process.exit();
+}
 
 // auth
 export const githubClientId = process.env.GITHUB_CLIENT_ID;

@@ -8,11 +8,11 @@ Here's where we'll be doing the planning and all.
 
 - **Audience:** Artists are the main users of this app.
   - **Tech-saviness:** Users won't be tech-savvy, keep it simple.
-  - **Time spent on the app:** For every couple minutes on the selection side, maybe fourty minutes on the image presentation side.
-  - **Environment:** The app likely won't be their main focus. They'll use it as a companion while drawing, off to the side. Could be on a mobile or desktop device.
+  - **Time spent on the app:** For every couple minutes on the selection side, maybe thirty minutes to an hour on the image presentation side.
+  - **Environment:** The app likely won't be their main focus. They'll use it as a companion while drawing, off to the side. Could be on either a mobile or desktop device.
 - **Use:** Click on a category, and see images from that category presented in a format similar to a life-drawing session.
 - **Technology:**
-  - **Frontend:** React. Maybe TailwindCSS.
+  - **Frontend:** React and TailwindCSS.
   - **Backend:** Express.js.
   - **Database:** Postgres.
   - **Login:** SSO with various services, not needed to access the site.
@@ -46,11 +46,11 @@ _What functionality is expected?_
 _What pain points exist with the existing tools?_
 
 - Can't add your own images or references.
-- Class-like intervals are very useful, but not always supported.
+- Class-like intervals (growing durations) are not always supported.
 
 ### Audience
 
-Admin users generally understand self-hosting, Docker images, importing content, and are tech-savvy.
+Admins generally understand self-hosting, Docker images, importing content, and are tech-savvy.
 
 Users are artists, may not be familiar with tech or the web, and are simply looking to draw with some references.
 
@@ -59,19 +59,20 @@ Users are artists, may not be familiar with tech or the web, and are simply look
 - Admin
   - **Categories**
     - Create a category.
-    - Edit the metadata for a category (nude/clothed, type of pose, type of animal, etc).
+    - Edit the metadata for a category (type of pose, type of animal, etc).
   - **Images**
-    - Import one or more images from a local directory, with default credit/metadata.
-    - Upload one or more images, with default credit/metadata.
+    - Import one or more images from a local directory on the server, with same credit/metadata applied to all images.
+    - Upload one or more images to an S3 bucket, with same credit/metadata applied to all images.
     - Bulk edit the categories/metadata of images.
     - Bulk remove images from the site.
+  - **Misc**
+    - Import sample data.
 - User
   - **Authentication**
-    - Register with SSO.
-    - Login with SSO.
+    - Register/login with SSO.
   - **Drawing session**
     - Select category and metadata, or favourites.
-    - Select image intervals (including class-like session).
+    - Select image intervals (static or class-like session).
     - Start session.
     - Pause and resume session.
     - Favourite images.
@@ -84,7 +85,7 @@ MVP:
 
 - Selection page: Select category, images, and timing. Is the landing page.
 - Image page: Display the current image.
-- Register/Login page: Login via SSO. Account is auto-created if it doesn't exist.
+- Register/Login page: Login via SSO. Account is created if it doesn't exist.
 - Admin dashboard: Modify available categories and images.
 
 Extra:

@@ -2,7 +2,7 @@ import postgres from "postgres";
 
 import { Category, Image, TagEntry, TagMap } from "../types/drawref.js";
 import urlJoin from "url-join";
-import { hostBaseURL } from "../config/env.js";
+import { uploadUrlPrefix } from "../config/env.js";
 
 function tagMapToDbTags(tags: TagMap): string[] {
   var tagsForDb: Array<string> = [];
@@ -86,7 +86,7 @@ class Database {
           where id = ${row.cover_image}
         `;
         if (ciRows[0].path) {
-          cat.cover = urlJoin(hostBaseURL, ciRows[0].path);
+          cat.cover = urlJoin(uploadUrlPrefix, ciRows[0].path);
         } else if (ciRows[0].external_url) {
           cat.cover = ciRows[0].external_url;
         }
@@ -164,7 +164,7 @@ class Database {
     for (const row of rows) {
       var img: Image = {
         id: row.image_id,
-        path: row.path ? urlJoin(hostBaseURL, row.path) : row.external_url,
+        path: row.path ? urlJoin(uploadUrlPrefix, row.path) : row.external_url,
         author: row.author || "",
         author_url: row.author_url || "",
       };
@@ -208,7 +208,7 @@ class Database {
     for (const row of rows) {
       var img: Image = {
         id: row.image_id,
-        path: row.path ? urlJoin(hostBaseURL, row.path) : row.external_url,
+        path: row.path ? urlJoin(uploadUrlPrefix, row.path) : row.external_url,
         author: row.author || "",
         author_url: row.author_url || "",
       };

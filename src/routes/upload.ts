@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import multer from "multer";
 import mime from "mime-types";
+import { uuidv7 } from "uuidv7";
 
 import { uploadPathTmp } from "../config/env.js";
 import { needAdmin } from "../auth/authRequiredMiddleware.js";
@@ -12,8 +13,7 @@ const upload = multer({
     },
     filename: function (req, file, cb) {
       const ext = mime.extension(file.mimetype) || "bin";
-      const uniqueValue = Date.now() + "-" + Math.round(Math.random() * 1e9);
-      cb(null, `${uniqueValue}.${ext}`);
+      cb(null, `${uuidv7()}.${ext}`);
     },
   }),
 });

@@ -2,10 +2,11 @@ import express, { Request, Response } from "express";
 import { copyFileSync } from "fs";
 import { join } from "path";
 
-import { uploadPathTmp, uploadPathFinal, hostBaseURL } from "../config/env.js";
 import { needAdmin } from "../auth/authRequiredMiddleware.js";
 import { useDatabase } from "../db/database.js";
 import urlJoin from "url-join";
+import { uploadPathTmp, uploadUrlPrefix } from "../config/env.js";
+import { uploadFile } from "../files/s3.js";
 
 export const router = express.Router();
 
@@ -24,13 +25,11 @@ router.post("/", needAdmin, async (req: Request, res: Response) => {
   }
 
   // move image to the live directory
-  try {
-    copyFileSync(join(uploadPathTmp, iPath), join(uploadPathFinal, iPath));
-  } catch (error) {
-    console.error("Failed to rename:", error);
+  const uploaded = uploadFile(join(uploadPathTmp, iPath), iPath);
+  if (!uploaded) {
     res.status(400);
     res.json({
-      error: "Couldn't add image.",
+      error: "Could not upload file.",
     });
     return;
   }
@@ -48,6 +47,6 @@ router.post("/", needAdmin, async (req: Request, res: Response) => {
 
   res.json({
     id: new_id,
-    url: iExternalUrl ? iExternalUrl : urlJoin(hostBaseURL, iPath),
+    url: iExternalUrl ? iExternalUrl : urlJoin(uploadUrlPrefix, iPath),
   });
 });
