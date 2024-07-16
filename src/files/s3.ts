@@ -11,7 +11,7 @@ export async function confirmS3Works(): Promise<boolean> {
     const data = await client.send(
       new PutObjectCommand({
         Bucket: "drawref",
-        Key: `${uploadKeyPrefix}test`,
+        Key: `${uploadKeyPrefix}drawref-test-upload`,
         Body: "test",
         // ContentMD5: '',
         ContentType: "text/plain",
