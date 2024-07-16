@@ -61,6 +61,34 @@ class Database {
     return;
   }
 
+  // note: images in the category won't be deleted, just unlinked from the category
+  async deleteCategory(id: string) {
+    try {
+      await this.sql`
+      delete from image_tags
+      where
+        category_id = ${id}
+      `;
+    } catch (error) {
+      // error
+      console.error("could not delete category images:", error);
+      return `Images error: ${error}`;
+    }
+
+    try {
+      await this.sql`
+        delete from categories
+        where
+          id = ${id}
+      `;
+    } catch (error) {
+      // error
+      console.error(error);
+      return `Error: ${error}`;
+    }
+    return;
+  }
+
   async getCategories() {
     var categories: Category[] = [];
 

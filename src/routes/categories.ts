@@ -131,6 +131,25 @@ router.put("/:id", async (req: Request, res: Response) => {
   });
 });
 
+router.delete("/:id", async (req: Request, res: Response) => {
+  var id = req.params.id || "";
+
+  const db = useDatabase();
+  const error = await db.deleteCategory(id);
+
+  if (error) {
+    res.status(400);
+    res.json({
+      error: "Couldn't delete category.",
+    });
+    return;
+  }
+
+  res.json({
+    ok: true,
+  });
+});
+
 router.get("/", async (req: Request, res: Response) => {
   const db = useDatabase();
   const categories = await db.getCategories();
