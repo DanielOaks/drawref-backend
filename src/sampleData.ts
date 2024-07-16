@@ -3,16 +3,18 @@
 //  appear as sample data with certain conditions applying.
 // check the LICENSE file for details.
 
-import { Category, SampleProviderEntry } from "./types/drawref.js";
+import { Category, SampleProviderEntry, TagMap } from "./types/drawref.js";
 
 type RawSampleCategory = {
   name: string;
+  cover?: string;
   tags: string;
 };
 
 var rawSampleCategories: RawSampleCategory[] = [
   {
     name: "Poses",
+    cover: "pose.jpg",
     tags: `
     Bodies: Men, Women, Other
     Clothing: Nude, Clothed
@@ -20,6 +22,7 @@ var rawSampleCategories: RawSampleCategory[] = [
   },
   {
     name: "Faces",
+    cover: "head.jpg",
     tags: `
     Expression: Happy, Sad, Angry, Scared, Disgust, Surprise
     Facial Hair: Facial Hair, No Facial Hair
@@ -27,6 +30,7 @@ var rawSampleCategories: RawSampleCategory[] = [
   },
   {
     name: "Animals",
+    cover: "animals.jpg",
     tags: `
     Species: Feline, Canine, Equine & Hooved, Avian, Aquatic, Rodents & Bunnies, Bugs and Insects, Primates
     Skeletons: Skeletons, Live`,
@@ -59,6 +63,7 @@ export var sampleCategories: Category[] = rawSampleCategories.map((info) => {
   return {
     id: info.name.toLowerCase(),
     name: info.name,
+    cover: info.cover,
     tags: info.tags
       .trim()
       .split("\n")
@@ -74,11 +79,19 @@ export var sampleCategories: Category[] = rawSampleCategories.map((info) => {
   };
 });
 
-export var sampleCategoryCovers = new Map<string, string>([
-  ["poses", "pose.jpg"],
-  ["faces", "head.jpg"],
-  ["animals", "animals.jpg"],
-]);
+export function parseSampleTags(input: string[]): TagMap {
+  let tags: TagMap = {};
+  for (const group of input) {
+    const newGroup = group.split(" ", 2);
+    const name = newGroup[0];
+    const value = newGroup[1].trim();
+    if (!tags[name]) {
+      tags[name] = [];
+    }
+    tags[name].push(value);
+  }
+  return tags;
+}
 
 export var sampleImages: SampleProviderEntry[] = [
   // adorkastock
