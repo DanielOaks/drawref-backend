@@ -1,8 +1,8 @@
 # Licensing
 
-The code is distributed under the ISC license. The sample data (in the `/samples` folder) is distributed under different terms as described below.
+The software is distributed under the ISC license. The sample data (in the `/samples` folder) is distributed under different terms as described below.
 
-## Source code
+## Software
 
 Copyright 2023 Daniel Oaks
 
