@@ -149,6 +149,65 @@ export var sampleImages: SampleProviderEntry[] = [
     author: "JookpubStock",
     author_url: "https://jookpubstock.com",
     requirement: "This site is completely free to access.",
-    images: [],
+    images: [
+      {
+        category: "poses",
+        images: [
+          {
+            path: "adorkastock/poses/006-scaled.jpg",
+            tags: ["bodies Other", "clothing Clothed", "energy Action"],
+          },
+          {
+            path: "adorkastock/poses/007-1-scaled.jpg",
+            tags: ["bodies Other", "clothing Clothed", "energy Stationary"],
+          },
+          {
+            path: "adorkastock/poses/Leaning-33-scaled.jpg",
+            tags: ["bodies Other", "clothing Clothed", "energy Static"],
+          },
+          {
+            path: "adorkastock/poses/Leaning-42-scaled.jpg",
+            tags: ["bodies Other", "clothing Clothed", "energy Static"],
+          },
+          {
+            path: "adorkastock/poses/Walking-Running-Cape-06-scaled.jpg",
+            tags: ["bodies Other", "clothing Clothed", "energy Action"],
+          },
+        ],
+      },
+      {
+        category: "hands & feet",
+        images: [
+          {
+            path: "adorkastock/foot/Foot-Pack-Eye-Level-04.jpg",
+            tags: ["bodies Other", "focus Feet"],
+          },
+          {
+            path: "adorkastock/foot/Foot-Pack-Eye-Level-05.jpg",
+            tags: ["bodies Other", "focus Feet"],
+          },
+          {
+            path: "adorkastock/foot/Foot-Pack-High-Angle-04.jpg",
+            tags: ["bodies Other", "focus Feet"],
+          },
+          {
+            path: "adorkastock/hands/Every-Day-Is-Hand-Day-04.jpg",
+            tags: ["bodies Other", "focus Hands"],
+          },
+          {
+            path: "adorkastock/hands/Every-Day-Is-Hand-Day-07.jpg",
+            tags: ["bodies Other", "focus Hands"],
+          },
+          {
+            path: "adorkastock/hands/Every-Day-Is-Hand-Day-12.jpg",
+            tags: ["bodies Other", "focus Hands"],
+          },
+          {
+            path: "adorkastock/hands/Every-Day-Is-Hand-Day-18.jpg",
+            tags: ["bodies Other", "focus Hands"],
+          },
+        ],
+      },
+    ],
   },
 ];
