@@ -34,7 +34,7 @@ export async function uploadFile(pathOnDisk: string, pathOnS3: string): Promise<
         Key: `${uploadKeyPrefix}${pathOnS3}`,
         Body: createReadStream(pathOnDisk),
         // ContentMD5: '',
-        ContentType: mime.contentType(pathOnS3) || "application/octet-stream",
+        ContentType: mime.lookup(pathOnS3) || "application/octet-stream",
       }),
     );
 
