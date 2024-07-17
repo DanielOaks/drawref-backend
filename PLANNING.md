@@ -93,6 +93,8 @@ Extra:
 - Favourites page: Lists the user's favourite images.
 - About page: Has info about the site and project.
 - Credits page: Has info about where the images are from.
+- Allow dragging the session controls somewhere else along the bottom, to get around obscuring info.
+- Maybe make credit links open in a new tab, and pause the slideshow.
 
 ## API
 
