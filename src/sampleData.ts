@@ -97,7 +97,7 @@ export var sampleImages: SampleProviderEntry[] = [
   // adorkastock
   {
     author: "AdorkaStock",
-    author_url: "https://www.adorkastock.com/",
+    author_url: "https://www.adorkastock.com",
     requirement: "",
     images: [
       {
