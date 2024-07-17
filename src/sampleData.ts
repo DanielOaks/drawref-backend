@@ -82,9 +82,9 @@ export var sampleCategories: Category[] = rawSampleCategories.map((info) => {
 export function parseSampleTags(input: string[]): TagMap {
   let tags: TagMap = {};
   for (const group of input) {
-    const newGroup = group.split(" ", 2);
-    const name = newGroup[0];
-    const value = newGroup[1].trim();
+    const newGroup = group.split(" ");
+    const name = newGroup.shift() || "";
+    const value = newGroup.join(" ").trim();
     if (!tags[name]) {
       tags[name] = [];
     }
@@ -154,23 +154,23 @@ export var sampleImages: SampleProviderEntry[] = [
         category: "poses",
         images: [
           {
-            path: "adorkastock/poses/006-scaled.jpg",
+            path: "jookpubstock/poses/006-scaled.jpg",
             tags: ["bodies Other", "clothing Clothed", "energy Action"],
           },
           {
-            path: "adorkastock/poses/007-1-scaled.jpg",
+            path: "jookpubstock/poses/007-1-scaled.jpg",
             tags: ["bodies Other", "clothing Clothed", "energy Stationary"],
           },
           {
-            path: "adorkastock/poses/Leaning-33-scaled.jpg",
+            path: "jookpubstock/poses/Leaning-33-scaled.jpg",
             tags: ["bodies Other", "clothing Clothed", "energy Static"],
           },
           {
-            path: "adorkastock/poses/Leaning-42-scaled.jpg",
+            path: "jookpubstock/poses/Leaning-42-scaled.jpg",
             tags: ["bodies Other", "clothing Clothed", "energy Static"],
           },
           {
-            path: "adorkastock/poses/Walking-Running-Cape-06-scaled.jpg",
+            path: "jookpubstock/poses/Walking-Running-Cape-06-scaled.jpg",
             tags: ["bodies Other", "clothing Clothed", "energy Action"],
           },
         ],
@@ -179,31 +179,31 @@ export var sampleImages: SampleProviderEntry[] = [
         category: "hands & feet",
         images: [
           {
-            path: "adorkastock/foot/Foot-Pack-Eye-Level-04.jpg",
+            path: "jookpubstock/foot/Foot-Pack-Eye-Level-04.jpg",
             tags: ["bodies Other", "focus Feet"],
           },
           {
-            path: "adorkastock/foot/Foot-Pack-Eye-Level-05.jpg",
+            path: "jookpubstock/foot/Foot-Pack-Eye-Level-05.jpg",
             tags: ["bodies Other", "focus Feet"],
           },
           {
-            path: "adorkastock/foot/Foot-Pack-High-Angle-04.jpg",
+            path: "jookpubstock/foot/Foot-Pack-High-Angle-04.jpg",
             tags: ["bodies Other", "focus Feet"],
           },
           {
-            path: "adorkastock/hands/Every-Day-Is-Hand-Day-04.jpg",
+            path: "jookpubstock/hands/Every-Day-Is-Hand-Day-04.jpg",
             tags: ["bodies Other", "focus Hands"],
           },
           {
-            path: "adorkastock/hands/Every-Day-Is-Hand-Day-07.jpg",
+            path: "jookpubstock/hands/Every-Day-Is-Hand-Day-07.jpg",
             tags: ["bodies Other", "focus Hands"],
           },
           {
-            path: "adorkastock/hands/Every-Day-Is-Hand-Day-12.jpg",
+            path: "jookpubstock/hands/Every-Day-Is-Hand-Day-12.jpg",
             tags: ["bodies Other", "focus Hands"],
           },
           {
-            path: "adorkastock/hands/Every-Day-Is-Hand-Day-18.jpg",
+            path: "jookpubstock/hands/Every-Day-Is-Hand-Day-18.jpg",
             tags: ["bodies Other", "focus Hands"],
           },
         ],
