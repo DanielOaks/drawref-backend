@@ -32,7 +32,7 @@ var rawSampleCategories: RawSampleCategory[] = [
     name: "Animals",
     cover: "animals.jpg",
     tags: `
-    Species: Feline, Canine, Equine & Hooved, Avian, Aquatic, Rodents & Bunnies, Bugs and Insects, Primates
+    Species: Feline, Canine, Equine & Hooved, Avian, Aquatic, Rodents & Bunnies, Bugs & Insects, Spiders, Primates
     Skeletons: Skeletons, Live`,
   },
   {
@@ -205,6 +205,56 @@ export var sampleImages: SampleProviderEntry[] = [
           {
             path: "adorkastock/hands/Every-Day-Is-Hand-Day-18.jpg",
             tags: ["bodies Other", "focus Hands"],
+          },
+        ],
+      },
+    ],
+  },
+
+  // daniel oakley
+  {
+    author: "Daniel Oaks",
+    author_url: "https://danieloaks.net",
+    requirement: "",
+    images: [
+      {
+        category: "animals",
+        images: [
+          {
+            path: "danieloaks/animals/bug_1.jpg",
+            tags: ["species Bugs & Insects", "skeletons Live"],
+          },
+          {
+            path: "danieloaks/animals/bug_2.jpg",
+            tags: ["species Bugs & Insects", "skeletons Live"],
+          },
+          {
+            path: "danieloaks/animals/bug_3.jpg",
+            tags: ["species Bugs & Insects", "skeletons Live"],
+          },
+          {
+            path: "danieloaks/animals/bug_4.jpg",
+            tags: ["species Bugs & Insects", "skeletons Live"],
+          },
+          {
+            path: "danieloaks/animals/bug_5.jpg",
+            tags: ["species Bugs & Insects", "skeletons Live"],
+          },
+          {
+            path: "danieloaks/animals/bug_6.jpg",
+            tags: ["species Bugs & Insects", "skeletons Live"],
+          },
+          {
+            path: "danieloaks/animals/bug_7.jpg",
+            tags: ["species Bugs & Insects", "skeletons Live"],
+          },
+          {
+            path: "danieloaks/animals/spider_1.jpg",
+            tags: ["species Spiders", "skeletons Live"],
+          },
+          {
+            path: "danieloaks/animals/spider_2.jpg",
+            tags: ["species Spiders", "skeletons Live"],
           },
         ],
       },
