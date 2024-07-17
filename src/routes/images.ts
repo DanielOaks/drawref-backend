@@ -50,3 +50,11 @@ router.post("/", needAdmin, async (req: Request, res: Response) => {
     url: iExternalUrl ? iExternalUrl : urlJoin(uploadUrlPrefix, iPath),
   });
 });
+
+router.get("/sources", async (req: Request, res: Response) => {
+  const db = useDatabase();
+
+  const sources = await db.getImageSources();
+
+  res.send(sources);
+});

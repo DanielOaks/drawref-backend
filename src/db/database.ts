@@ -271,6 +271,23 @@ class Database {
     }
     return rows[0].num;
   }
+
+  async getImageSources() {
+    var sources: string[][] = [];
+
+    const rows = await this.sql`
+      select distinct author, author_url
+      from images
+      order by author, author_url
+    `;
+    for (const row of rows) {
+      if (row.author != "" || row.author_url != "") {
+        sources.push([row.author, row.author_url]);
+      }
+    }
+
+    return sources;
+  }
 }
 
 export function initialiseDatabase(url: string, options?: postgres.Options<{}>) {
