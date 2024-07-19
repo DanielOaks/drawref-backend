@@ -21,3 +21,7 @@ Adorkastock distributes their free images under the Creative Commons Attribution
 ## JookpubStock sample images
 
 Jen has given their permission to include their free resources as part of this app so long as the webapp is completely free. I'm distributing this for free, so no dramas there. When running the app, this condition is enforced before importing with a checkbox confirming that the site doesn't have any pay-to-access restrictions.
+
+## The Pose Archives sample images
+
+We've gotten permission to share these images as part of this app so long as their name and website is linked.

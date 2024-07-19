@@ -71,7 +71,7 @@ export var sampleCategories: Category[] = rawSampleCategories.map((info) => {
       .map((tagNameAndList) => {
         const tagNameInfo = tagNameAndList.split(":", 2);
         return {
-          id: tagNameInfo[0].toLowerCase(),
+          id: tagNameInfo[0].toLowerCase().replace(" ", "_"),
           name: tagNameInfo[0],
           values: tagNameInfo[1].split(",").map((n) => n.trim()),
         };
@@ -83,12 +83,12 @@ export function parseSampleTags(input: string[]): TagMap {
   let tags: TagMap = {};
   for (const group of input) {
     const newGroup = group.split(" ");
-    const name = newGroup.shift() || "";
+    const tId = newGroup.shift() || "";
     const value = newGroup.join(" ").trim();
-    if (!tags[name]) {
-      tags[name] = [];
+    if (!tags[tId]) {
+      tags[tId] = [];
     }
-    tags[name].push(value);
+    tags[tId].push(value);
   }
   return tags;
 }
@@ -255,6 +255,76 @@ export var sampleImages: SampleProviderEntry[] = [
           {
             path: "danieloaks/animals/spider_2.jpg",
             tags: ["species Spiders", "skeletons Live"],
+          },
+        ],
+      },
+    ],
+  },
+
+  // the pose archives
+  {
+    author: "The Pose Archives",
+    author_url: "https://linktr.ee/theposearchives",
+    requirement: "",
+    images: [
+      {
+        category: "faces",
+        images: [
+          {
+            path: "theposearchives/faces/female_putting_up_hair_pose_by_theposearchives_dfz8zlz-fullview.jpg",
+            tags: ["expression Sad", "facial_hair No Facial Hair", "bodies Women"],
+          },
+          {
+            path: "theposearchives/faces/male_expressions_reference_by_theposearchives_dehnzwy-fullview.jpg",
+            tags: [
+              "expression Happy",
+              "expression Angry",
+              "expression Disgust",
+              "expression Surprise",
+              "facial_hair Facial Hair",
+              "bodies Men",
+            ],
+          },
+          {
+            path: "theposearchives/faces/male_expressions_reference_by_theposearchives_deihy0p-fullview.jpg",
+            tags: ["expression Angry", "expression Surprise", "facial_hair Facial Hair", "bodies Men"],
+          },
+        ],
+      },
+      {
+        category: "poses",
+        images: [
+          {
+            path: "theposearchives/poses/female_archer_pose_close_up_perspective_shot_by_theposearchives_df2yjwm-pre.jpg",
+            tags: ["bodies Women", "clothing Clothed", "energy Action"],
+          },
+          {
+            path: "theposearchives/poses/female_cloaked_mage_with_staff_pose_by_theposearchives_dglvdzv-fullview.jpg",
+            tags: ["bodies Women", "clothing Clothed", "energy Action"],
+          },
+          {
+            path: "theposearchives/poses/female_confident_walk_pose_by_theposearchives_df7aql5-fullview.jpg",
+            tags: ["bodies Women", "clothing Clothed", "energy Stationary"],
+          },
+          {
+            path: "theposearchives/poses/male_and_female_greek_inspired_pose_3_by_theposearchives_dg28jxa-fullview.jpg",
+            tags: ["bodies Women", "bodies Men", "clothing Clothed", "energy Stationary"],
+          },
+          {
+            path: "theposearchives/poses/male_close_up_villain_pose_by_theposearchives_dhkzwiw-fullview.jpg",
+            tags: ["bodies Men", "clothing Clothed", "energy Stationary"],
+          },
+          {
+            path: "theposearchives/poses/male_epic_low_angle_battle_pose_by_theposearchives_dh7611i-fullview.jpg",
+            tags: ["bodies Men", "clothing Clothed", "energy Action"],
+          },
+          {
+            path: "theposearchives/poses/male_strong_standing_pose_by_theposearchives_df7aqle-fullview.jpg",
+            tags: ["bodies Men", "clothing Clothed", "energy Stationary"],
+          },
+          {
+            path: "theposearchives/poses/male_wizard_casting_spell_with_broom_pose_02_by_theposearchives_dfiddzi-fullview.jpg",
+            tags: ["bodies Men", "clothing Clothed", "energy Action"],
           },
         ],
       },
