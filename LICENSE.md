@@ -18,6 +18,10 @@ These are drawn by me (Daniel Oaks). I'm happy to distribute those as part of th
 
 Adorkastock distributes their free images under the Creative Commons Attribution 3.0 Unported License (CC BY 3.0) license. We've gotten permission to share these images as part of this app so long as their name and website is linked.
 
+## Grafit Studio sample images
+
+Grafit Studio has given us permission to use their Studio License for sharing their studio's pictures with the app, so long as their name and store is linked.
+
 ## JookpubStock sample images
 
 Jen has given their permission to include their free resources as part of this app so long as the webapp is completely free. I'm distributing this for free, so no dramas there. When running the app, this condition is enforced before importing with a checkbox confirming that the site doesn't have any pay-to-access restrictions.

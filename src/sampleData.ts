@@ -330,4 +330,59 @@ export var sampleImages: SampleProviderEntry[] = [
       },
     ],
   },
+
+  // grafit studio
+  {
+    author: "Grafit Studio",
+    author_url: "https://www.artstation.com/grafit/store",
+    requirement: "",
+    images: [
+      {
+        category: "faces",
+        images: [
+          {
+            path: "grafitstudio/faces/Anya0039.jpg",
+            tags: ["expression Sad", "facial_hair No Facial Hair", "bodies Women"],
+          },
+          {
+            path: "grafitstudio/faces/Anya0091.jpg",
+            tags: ["expression Sad", "facial_hair No Facial Hair", "bodies Women"],
+          },
+          {
+            path: "grafitstudio/faces/nastiya-49.jpg",
+            tags: ["facial_hair No Facial Hair", "bodies Women"],
+          },
+        ],
+      },
+      {
+        category: "poses",
+        images: [
+          {
+            path: "grafitstudio/poses/maria 8 febriary0028.jpg",
+            tags: ["bodies Women", "clothing Nude", "energy Action"],
+          },
+          {
+            path: "grafitstudio/poses/Milky Liza1841.jpg",
+            tags: ["bodies Women", "clothing Nude", "energy Stationary"],
+          },
+          {
+            path: "grafitstudio/poses/nastiya-411.jpg",
+            tags: ["bodies Women", "clothing Clothed", "energy Action"],
+          },
+          {
+            path: "grafitstudio/poses/pose0003.jpg",
+            tags: ["bodies Women", "clothing Clothed", "energy Action"],
+          },
+          {
+            path: "grafitstudio/poses/pose0138.jpg",
+            tags: ["bodies Women", "clothing Clothed", "energy Stationary"],
+          },
+          {
+            path: "grafitstudio/poses/pose0276.jpg",
+            tags: ["bodies Women", "clothing Clothed", "energy Action"],
+          },
+        ],
+      },
+    ],
+  },
 ];
