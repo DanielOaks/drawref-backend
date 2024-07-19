@@ -25,6 +25,10 @@ class Database {
   //
 
   async addCategory(id: string, name: string, cover: number, tags: Array<TagEntry>): Promise<string | undefined> {
+    if (tags.filter((info) => info.id.includes(" ")).length > 0) {
+      return "Error: tag IDs cannot contain spaces";
+    }
+
     var newId: string = "";
     try {
       const row = await this.sql`
@@ -44,6 +48,10 @@ class Database {
   }
 
   async editCategory(id: string, name: string, cover: number, tags: Array<TagEntry>): Promise<string | undefined> {
+    if (tags.filter((info) => info.id.includes(" ")).length > 0) {
+      return "Error: tag IDs cannot contain spaces";
+    }
+
     try {
       await this.sql`
         update categories
