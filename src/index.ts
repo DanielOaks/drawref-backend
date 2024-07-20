@@ -9,7 +9,7 @@ import { router as categoriesRouter } from "./routes/categories.js";
 import { router as imagesRouter } from "./routes/images.js";
 import { router as samplesRouter } from "./routes/samples.js";
 import { router as sessionRouter } from "./routes/session.js";
-import { router as testRouter } from "./routes/test.js";
+import { router as rootRouter } from "./routes/root.js";
 import { router as userRouter } from "./routes/user.js";
 import { router as uploadRouter } from "./routes/upload.js";
 import { confirmS3Works } from "./files/s3.js";
@@ -36,7 +36,7 @@ app.use("/api/image", imagesRouter);
 app.use("/api/samples", samplesRouter);
 app.use("/api/session", sessionRouter);
 app.use("/api/user", userRouter);
-app.use("/api", testRouter);
+app.use("/api", rootRouter);
 
 // intended mostly for dev testing
 app.use("/images", express.static("public"));

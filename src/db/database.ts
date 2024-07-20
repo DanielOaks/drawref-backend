@@ -104,7 +104,7 @@ class Database {
     const rows = await this.sql`
       select *
       from categories
-      order by id desc
+      order by position asc, id desc
     `;
     for (const row of rows) {
       var cat: Category = {
@@ -132,6 +132,43 @@ class Database {
     }
 
     return categories;
+  }
+
+  async reorderCategories(ids: string[]): Promise<string> {
+    try {
+      // ensure that all category ids are in the `ids` list
+      const rows = await this.sql`
+        select id from categories
+      `;
+      const allCategoryIds: string[] = rows.map((row) => row.id);
+
+      for (const id of ids) {
+        let index = allCategoryIds.indexOf(id);
+        if (index === -1) {
+          throw "Unknown or duplicate category ID given";
+        }
+        allCategoryIds.splice(index, 1);
+      }
+
+      // append all un-ordered category IDs to the end of `ids`
+      ids = ids.concat(allCategoryIds.sort());
+
+      // reorder!
+      const update_data = ids.map((id, index) => [id, index]);
+
+      await this.sql`
+        update categories
+        set position = (update_data.position)::int
+        from (values ${this.sql(update_data)}) as update_data (id, position)
+        where categories.id = update_data.id
+      `;
+    } catch (error) {
+      // error
+      console.error("could not reorder categories:", error);
+      return `${error}`;
+    }
+
+    return "";
   }
 
   // Images
