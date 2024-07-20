@@ -156,6 +156,34 @@ class Database {
     return newId;
   }
 
+  async deleteUnusedImages() {
+    try {
+      const rows = await this.sql`
+        select id
+        from images
+        left outer join image_tags
+          on images.id = image_tags.image_id
+        where image_tags.image_id is null
+          and images.id not in (select cover_image from categories)
+        order by id
+      `;
+
+      const ids: number[] = [];
+      for (const row of rows) {
+        ids.push(row.id);
+      }
+
+      await this.sql`
+        delete from images
+        where
+          id = any(${ids})
+      `;
+    } catch (error) {
+      // error
+      console.error(error);
+    }
+  }
+
   async addImageToCategory(category: string, image: number, tags: TagMap) {
     const tagsForDb = tagMapToDbTags(tags);
 
