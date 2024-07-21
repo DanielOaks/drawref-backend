@@ -38,8 +38,7 @@ var rawSampleCategories: RawSampleCategory[] = [
   {
     name: "Hands & Feet",
     tags: `
-    Focus: Hands, Feet
-    Bodies: Men, Women, Other`,
+    Focus: Hands, Feet`,
   },
   {
     name: "Plants",
@@ -180,31 +179,31 @@ export var sampleImages: SampleProviderEntry[] = [
         images: [
           {
             path: "jookpubstock/foot/Foot-Pack-Eye-Level-04.jpg",
-            tags: ["bodies Other", "focus Feet"],
+            tags: ["focus Feet"],
           },
           {
             path: "jookpubstock/foot/Foot-Pack-Eye-Level-05.jpg",
-            tags: ["bodies Other", "focus Feet"],
+            tags: ["focus Feet"],
           },
           {
             path: "jookpubstock/foot/Foot-Pack-High-Angle-04.jpg",
-            tags: ["bodies Other", "focus Feet"],
+            tags: ["focus Feet"],
           },
           {
             path: "jookpubstock/hands/Every-Day-Is-Hand-Day-04.jpg",
-            tags: ["bodies Other", "focus Hands"],
+            tags: ["focus Hands"],
           },
           {
             path: "jookpubstock/hands/Every-Day-Is-Hand-Day-07.jpg",
-            tags: ["bodies Other", "focus Hands"],
+            tags: ["focus Hands"],
           },
           {
             path: "jookpubstock/hands/Every-Day-Is-Hand-Day-12.jpg",
-            tags: ["bodies Other", "focus Hands"],
+            tags: ["focus Hands"],
           },
           {
             path: "jookpubstock/hands/Every-Day-Is-Hand-Day-18.jpg",
-            tags: ["bodies Other", "focus Hands"],
+            tags: ["focus Hands"],
           },
         ],
       },
