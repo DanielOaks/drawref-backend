@@ -59,7 +59,7 @@ router.get("/sources", async (req: Request, res: Response) => {
   res.send(sources);
 });
 
-router.delete("/unused", async (req: Request, res: Response) => {
+router.delete("/unused", needAdmin, async (req: Request, res: Response) => {
   const db = useDatabase();
 
   await db.deleteUnusedImages();
