@@ -5,7 +5,7 @@ import { useDatabase } from "../db/database.js";
 
 export const router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/ping", (req: Request, res: Response) => {
   res.json({
     ping: "ok",
   });
