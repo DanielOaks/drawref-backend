@@ -1,0 +1,220 @@
+# Drawref API Endpoints + Details
+
+openapi: 3.1.0
+
+info:
+  title: Drawref API
+  description: |
+    The Drawref API lets you upload and browse tagged collections of images.
+  version: 1.0.0
+
+paths:
+  /api/ping:
+    get:
+      operationId: getPing
+      summary: Make sure the API works.
+      description: |
+        Makes sure the API works.
+
+  /api/user:
+    get:
+      operationId: getUser
+      summary: Returns current user details.
+      security:
+        - bearerAuth
+      description: |
+        Returns current user details.
+
+  /api/samples:
+    get:
+      operationId: getSampleData
+      summary: Returns available sample data.
+      security:
+        - bearerAuth
+      description: |
+        Returns available sample data.
+
+  /api/samples/import:
+    post:
+      operationId: importSampleData
+      summary: Imports the selected sample data.
+      security:
+        - bearerAuth
+      description: |
+        Imports the selected sample data.
+
+  /api/categories:
+    get:
+      operationId: getAllCategories
+      summary: Get all categories.
+      description: |
+        Get all categories.
+
+  /api/category:
+    post:
+      operationId: createCategory
+      summary: Create a category.
+      security:
+        - bearerAuth
+      description: |
+        Create a category.
+
+  /api/category/{id}:
+    get:
+      operationId: getCategory
+      summary: Get a category.
+      description: |
+        Get a category.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: |
+            Selected category.
+
+    put:
+      operationId: updateCategory
+      summary: Update a category.
+      security:
+        - bearerAuth
+      description: |
+        Update a category.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: |
+            Selected category.
+
+    delete:
+      operationId: deleteCategory
+      summary: Delete a category.
+      security:
+        - bearerAuth
+      description: |
+        Delete a category.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: |
+            Selected category.
+
+  /api/category/{id}/images:
+    get:
+      operationId: getCategoryImages
+      summary: Get a category's images.
+      description: |
+        Get a category's images.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: |
+            Selected category.
+
+  /api/category/{categoryId}/images/{imageId}:
+    post:
+      operationId: addImageToCategory
+      summary: Add image to a category.
+      description: |
+        Add image to a category.
+      parameters:
+        - in: path
+          name: categoryId
+          schema:
+            type: string
+          required: true
+          description: |
+            Selected category.
+        - in: path
+          name: imageId
+          schema:
+            type: integer
+          required: true
+          description: |
+            Selected image.
+
+    delete:
+      operationId: removeImageFromCategory
+      summary: Remove image from a category.
+      description: |
+        Remove image from a category.
+      parameters:
+        - in: path
+          name: categoryId
+          schema:
+            type: string
+          required: true
+          description: |
+            Selected category.
+        - in: path
+          name: imageId
+          schema:
+            type: integer
+          required: true
+          description: |
+            Selected image.
+
+  /upload/image:
+    post:
+      operationId: uploadImageBlob
+      summary: Upload an image blob.
+      security:
+        - bearerAuth
+      description: |
+        Uploads an image blob.
+
+  /api/image:
+    post:
+      operationId: createImage
+      summary: Create an image.
+      security:
+        - bearerAuth
+      description: |
+        Create an image.
+
+  /api/image/sources:
+    get:
+      operationId: getImageSources
+      summary: Get image sources.
+      description: |
+        Get image sources.
+
+  /api/image/unused:
+    delete:
+      operationId: deleteUnusedImages
+      summary: Delete unused images.
+      security:
+        - bearerAuth
+      description: |
+        Delete unused images.
+
+  /api/session:
+    get:
+      operationId: getSessionImages
+      summary: Get session images.
+      description: |
+        Get session images.
+
+  /api/session/count:
+    get:
+      operationId: getSessionImageCount
+      summary: Get session image count.
+      description: |
+        Get session image count.
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        This is your Drawref API token.
